@@ -8,8 +8,9 @@ namespace ProjectCards
 {
     internal interface IPayment
     {
-        string MakePayment();
-        string TopUp();
         string GetFullInformation();
+        bool MakePayment();
+        bool TopUp();
+        bool PayProduct(float sumProduct);
     }
 }
