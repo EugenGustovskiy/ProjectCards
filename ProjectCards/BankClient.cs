@@ -35,28 +35,5 @@ namespace ProjectCards
             }
             return false;
         }
-
-        //public bool Pay(List<Goods> items)
-        //{
-        //    Console.WriteLine($"Product list and price: {items}.\n What item would you like to purchase?");
-        //    string input = Console.ReadLine();
-        //    byte numberItem;
-        //    if(byte.TryParse(input, out numberItem))
-        //    {
-        //        if(numberItem == 1)
-        //        {
-        //            if()
-        //            {
-        //                Console.WriteLine(items[0]);
-        //            }
-                    
-        //        }
-        //        if(numberItem == 2)
-        //        {
-        //            Console.WriteLine(items[1]);
-        //        }
-        //    }
-
-        //}
     }
 }
