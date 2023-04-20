@@ -12,5 +12,6 @@ namespace ProjectCards
         bool MakePayment();
         bool TopUp();
         bool PayProduct(float sumProduct);
+        float AllMoney();
     }
 }

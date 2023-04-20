@@ -24,6 +24,7 @@ namespace ProjectCards.PaymentMethods.PaymentCards
         public abstract bool MakePayment();
         public abstract bool TopUp();
         public abstract bool PayProduct(float sumProduct);
+        public abstract float AllMoney();
         public abstract string GetFullInformation();
 
     }

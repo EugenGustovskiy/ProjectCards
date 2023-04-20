@@ -27,12 +27,12 @@ namespace ProjectCards.PaymentMethods
         {
             AccountAmount *= 77735.16f;
             //Next, we call a method that rounds the result to two decimal places, and the updated value is saved.
-            AccountAmount = (float)Math.Round(AccountAmount, 2); 
+            AccountAmount = (float)Math.Round(AccountAmount, 2);
         }
 
         //Method to conver BYN to Bitcoin.
         public void ConvertBYNToBTC()
-        { 
+        {
             AccountAmount /= 77735.16f;
             AccountAmount = (float)Math.Round(AccountAmount, 2);
         }
@@ -169,6 +169,15 @@ namespace ProjectCards.PaymentMethods
                 ConvertBYNToBTC();
                 return false;
             }
+        }
+
+
+        public float AllMoney()
+        {
+            float allMoney = 0;
+            float convert = AccountAmount * 77735.16f;
+            allMoney += convert;
+            return allMoney;
         }
 
 

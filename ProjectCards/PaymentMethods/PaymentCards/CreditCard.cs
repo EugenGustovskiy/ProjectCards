@@ -180,6 +180,15 @@ namespace ProjectCards.PaymentMethods.PaymentCards
         }
 
 
+        //The method calculates the amount of all available money
+        public override float AllMoney()
+        {
+            float allMoney = 0;
+            allMoney += AccountAmount + CreditMoney;
+            return allMoney;
+        }
+
+
         //This method prints all information on cards to the console.
         public override string GetFullInformation()
         {

@@ -114,7 +114,7 @@ namespace ProjectCards.PaymentMethods.PaymentCards
             string inputY_N = Console.ReadLine();
             if (inputY_N == "y" || inputY_N == "Y")
             {
-                if(sumProduct <= AccountAmount)
+                if (sumProduct <= AccountAmount)
                 {
                     AccountAmount -= sumProduct;
                     Console.WriteLine("Operation was successfully completed.");
@@ -136,6 +136,14 @@ namespace ProjectCards.PaymentMethods.PaymentCards
                 Console.WriteLine("Input Error.");
                 return false;
             }
+        }
+
+
+        public override float AllMoney()
+        {
+            float allMoney = 0;
+            allMoney += AccountAmount;
+            return allMoney;
         }
 
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCards
+namespace ProjectCards.BankClients
 {
     internal class Address
     {
@@ -21,6 +21,11 @@ namespace ProjectCards
             Street = street;
             HouseNumber = houseNumber;
             FlatNumber = flatNumber;
+        }
+
+        public override string ToString()
+        {
+            return "State: " + State + ", " + "City: " + City + ", " + "Street: " + Street + ", " + "HouseNumber: " + HouseNumber + ", " + "FlatNumber: " + FlatNumber;
         }
     }
 }

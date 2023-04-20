@@ -140,6 +140,14 @@ namespace ProjectCards.PaymentMethods
         }
 
 
+        public float AllMoney()
+        {
+            float allMoney = 0;
+            allMoney += AccountAmount;
+            return allMoney;
+        }
+
+
         public string GetFullInformation()
         {
             return string.Format("All information about: CASH\nCASH: {0};\nMONEY ON THE CARD: {1};", AccountAmount, CashAccount);
