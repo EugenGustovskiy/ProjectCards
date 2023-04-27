@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectCards.BankClients
 {
-    internal class Address
+    internal class Address : IComparable<Address>
     {
         public string State { get; set; }
         public string City { get; set; }
@@ -22,6 +22,13 @@ namespace ProjectCards.BankClients
             HouseNumber = houseNumber;
             FlatNumber = flatNumber;
         }
+
+
+        public int CompareTo(Address? other)
+        {
+            return this.City.CompareTo(other.City);
+        }
+
 
         public override string ToString()
         {

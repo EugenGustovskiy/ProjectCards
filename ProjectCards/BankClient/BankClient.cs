@@ -1,5 +1,4 @@
-﻿using ProjectCards.Comparers;
-using ProjectCards.PaymentMethods.PaymentCards;
+﻿using ProjectCards.PaymentMethods.PaymentCards;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -102,8 +101,5 @@ namespace ProjectCards.BankClients
         {
             return string.Format("Last Name: {0};\nAddress: {1};\n{2}", LastName, Address, InformationAboutPaymentMethods());
         }
-
-
-
     }
 }
