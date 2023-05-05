@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProjectCards.Interfaces;
 
-namespace ProjectCards.PaymentMethods.PaymentCards
+namespace ProjectCards.PaymentMethods.PaymentCards;
+
+internal abstract class PaymentCards : IPayment, IGetFullInformation, IPay
 {
-    internal abstract class PaymentCards : IPayment
+    public string CardNumber { get; init; }
+    public Validity Validity { get; init; }
+    public int CVV { get; init; }
+    public float AccountAmount { get; set; }
+
+    public PaymentCards(string cardNumber, Validity validity, int cvv, float accountAmount)
     {
-        public string CardNumber { get; set; }
-        public Validity Validity { get; set; }
-        public int CCV { get; set; }
-        public float AccountAmount { get; set; }
-
-        public PaymentCards(string cardNumber, Validity validity, int ccv, float accountAmount)
-        {
-            CardNumber = cardNumber;
-            Validity = validity;
-            CCV = ccv;
-            AccountAmount = accountAmount;
-        }
-
-        public abstract bool MakePayment();
-        public abstract bool TopUp();
-        public abstract bool PayProduct(float sumProduct);
-        public abstract float AllMoney();
-        public abstract string GetFullInformation();
-
+        CardNumber = cardNumber;
+        Validity = validity;
+        CVV = cvv;
+        AccountAmount = accountAmount;
     }
+
+    public abstract bool MakePayment(float sum);
+    public abstract bool TopUp(float sum);
+    public abstract bool PayProduct(float sumProduct);
+    public abstract float AllMoney();
+    public abstract string GetFullInformation();
 }

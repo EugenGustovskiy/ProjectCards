@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectCards.PaymentMethods.PaymentCards
+﻿namespace ProjectCards.PaymentMethods.PaymentCards;
+internal class Validity
 {
-    internal class Validity
+    public byte Month { get; init; }
+    public byte Year { get; init; }
+
+    public Validity(byte month, byte year)
     {
-        public byte Month { get; set; }
-        public byte Year { get; set; }
+        Month = month;
+        Year = year;
+    }
 
-        public Validity(byte month, byte year)
-        {
-            Month = month;
-            Year = year;
-        }
-
-        public override string ToString()
-        {
-            return Month + "/" + Year;
-        }
+    public override string ToString()
+    {
+        return Month + "/" + Year;
     }
 }

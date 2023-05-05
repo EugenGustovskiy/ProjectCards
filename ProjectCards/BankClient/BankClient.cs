@@ -1,105 +1,104 @@
-﻿using ProjectCards.PaymentMethods.PaymentCards;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProjectCards.Interfaces;
+using ProjectCards.PaymentMethods.PaymentCards;
 
-namespace ProjectCards.BankClients
+namespace ProjectCards.BankClients;
+internal class BankClient : IComparable<BankClient>
 {
-    internal class BankClient : IComparable<BankClient>
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public Address Address { get; set; }
+    public List<IPayment> PaymentMethods { get; set; }
+
+    public BankClient(string firstName, string lastName, Address address, List<IPayment> paymentMethods)
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Address Address { get; set; }
-        public List<IPayment> PaymentMethods { get; set; }
+        FirstName = firstName;
+        LastName = lastName;
+        Address = address;
+        PaymentMethods = paymentMethods;
+    }
 
-        public BankClient(string firstName, string lastName, Address address, List<IPayment> paymentMethods)
+
+    public bool Pay(float sumProduct)
+    {
+        foreach (IPayment payment in PaymentMethods)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Address = address;
-            PaymentMethods = paymentMethods;
-        }
-
-
-        public bool Pay(float sumProduct)
-        {
-            foreach (IPayment i in PaymentMethods)
+            if (payment is IPay payMethod)
             {
-                if (i.PayProduct(sumProduct) == true)
+                if (payMethod.PayProduct(sumProduct))
                 {
                     return true;
                 }
             }
-            return false;
         }
+        return false;
+    }
 
-        //Sorting method by FirstName.
-        public int CompareTo(BankClient? other)
+
+    //Sorting method by FirstName.
+    public int CompareTo(BankClient? other)
+    {
+        return this.FirstName.CompareTo(other?.FirstName);
+    }
+
+
+    //This method counts the number of payment cards
+    public int NumberOfCards()
+    {
+        int sumCards = 0;
+        foreach (IPayment i in PaymentMethods)
         {
-            return this.FirstName.CompareTo(other.FirstName);
-        }
-
-
-        //This method counts the number of payment cards
-        public int NumberOfCards()
-        {
-            int sumCards = 0;
-            foreach (IPayment i in PaymentMethods)
+            if (i is CashBackCard || i is CreditCard || i is DebetCard)
             {
-                if (i is CashBackCard | i is CreditCard | i is DebetCard)
-                {
-                    sumCards++;
-                }
+                sumCards++;
             }
-            return sumCards;
         }
+        return sumCards;
+    }
 
-        //The method calculates the total amount(the amount from all means of payment)
-        public float AllMoneyBankClient()
+    //The method calculates the total amount(the amount from all means of payment)
+    public float AllMoneyBankClient()
+    {
+        float sumMoneyBankClient = 0;
+        foreach (IPayment i in PaymentMethods)
         {
-            float sumMoneyBankClient = 0;
-            foreach (IPayment i in PaymentMethods)
+            if (i.AllMoney() > 0)
             {
-                if (i.AllMoney() > 0)
-                {
-                    sumMoneyBankClient += i.AllMoney();
-                }
+                sumMoneyBankClient += i.AllMoney();
             }
-            return sumMoneyBankClient;
         }
+        return sumMoneyBankClient;
+    }
 
 
-        public float MaxMoneyBankClient()
+    public float MaxMoneyBankClient()
+    {
+        float maxMoneyClientBank = 0;
+        foreach (IPayment i in PaymentMethods)
         {
-            float maxMoneyClientBank = 0;
-            foreach (IPayment i in PaymentMethods)
+            if (i.AllMoney() > 0 && i.AllMoney() > maxMoneyClientBank)
             {
-                if (i.AllMoney() > 0 && i.AllMoney() > maxMoneyClientBank)
-                {
-                    maxMoneyClientBank = i.AllMoney();
-                }
+                maxMoneyClientBank = i.AllMoney();
             }
-            return maxMoneyClientBank;
         }
+        return maxMoneyClientBank;
+    }
 
-        public string InformationAboutPaymentMethods()
+    public string InformationAboutPaymentMethods()
+    {
+        string info = "";
+        foreach (IPayment i in PaymentMethods)
         {
-            string info = "";
-            foreach (IPayment i in PaymentMethods)
+            if (i is IGetFullInformation fullInfo)
             {
-                info += i.GetFullInformation() + "\n";
+                info += fullInfo.GetFullInformation() + "\n";
             }
-            return info;
         }
+        return info;
+    }
 
 
-        public string AllInformation()
-        {
-            return string.Format("Last Name: {0};\nAddress: {1};\n{2}", LastName, Address, InformationAboutPaymentMethods());
-        }
+    public string AllInformation()
+    {
+        return $"Last Name: {LastName};\nAddress: {Address};\n{InformationAboutPaymentMethods()}";
     }
 }
