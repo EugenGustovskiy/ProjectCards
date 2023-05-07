@@ -8,8 +8,8 @@ internal class CreditCard : PaymentCards, IGetFullInformation, IPay
     public float CreditLimit { get; set; }
 
 
-    public CreditCard(string number, Validity validity, int cvv, float accountAmount, float creditPercentage,
-                      float creditMoney, float creditLimit) : base(number, validity, cvv, accountAmount)
+    public CreditCard(long cardNumber, Validity validity, int cvv, float accountAmount, float creditPercentage,
+                      float creditMoney, float creditLimit) : base(cardNumber, validity, cvv, accountAmount)
     {
         CreditPercentage = creditPercentage;
         CreditMoney = creditMoney;

@@ -3,7 +3,7 @@
 namespace ProjectCards.PaymentMethods.PaymentCards;
 internal class DebetCard : PaymentCards, IGetFullInformation, IPay
 {
-    public DebetCard(string cardNumber, Validity validity, int cvv, float accountAmount) :
+    public DebetCard(long cardNumber, Validity validity, int cvv, float accountAmount) :
                 base(cardNumber, validity, cvv, accountAmount)
     {
     }

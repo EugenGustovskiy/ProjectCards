@@ -7,7 +7,7 @@ internal class CashBackCard : PaymentCards, IGetFullInformation, IPay
     public float ReturnPercentage { get; set; }
     public float SumCashBack { get; set; }
 
-    public CashBackCard(string cardNumber, Validity validity, int ccv, float accountAmount, float returnPercentage,
+    public CashBackCard(long cardNumber, Validity validity, int ccv, float accountAmount, float returnPercentage,
                         float sumCashBack) : base(cardNumber, validity, ccv, accountAmount)
     {
         ReturnPercentage = returnPercentage;

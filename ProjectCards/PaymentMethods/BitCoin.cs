@@ -3,7 +3,28 @@
 namespace ProjectCards.PaymentMethods;
 internal class BitCoin : IPayment, IGetFullInformation, IPay
 {
-    public string WalletNumber { get; init; }
+    protected string _walletNumber;
+    public string WalletNumber
+    { 
+        get => _walletNumber;
+        init
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length > 16)
+            {
+                throw new ArgumentException(nameof(value));
+            }
+            string walletNumberString = value.ToString().PadLeft(16, '0');
+            if (walletNumberString != value.ToString())
+            {
+                throw new ArgumentException("Wallet number should be a 16-digit number", nameof(value));
+            }
+            _walletNumber = value;
+        }
+    }
     public float AccountAmount { get; set; }
 
 

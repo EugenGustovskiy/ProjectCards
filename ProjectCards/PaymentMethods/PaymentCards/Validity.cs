@@ -1,7 +1,8 @@
 ﻿namespace ProjectCards.PaymentMethods.PaymentCards;
 internal class Validity
 {
-    public byte Month { get; init; }
+    public byte Month { get; 
+        init; }
     public byte Year { get; init; }
 
     public Validity(byte month, byte year)

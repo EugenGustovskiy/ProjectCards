@@ -8,11 +8,71 @@ namespace ProjectCards.BankClients
 {
     internal class Address : IComparable<Address>
     {
-        public string State { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public int HouseNumber { get; set; }
-        public int FlatNumber { get; set; }
+        protected string _state;
+        public string State
+        { 
+            get => _state; 
+            set
+            {
+                if(string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("The value is null or empty.");
+                }
+                _state = value;
+            }
+        }
+        protected string _city;
+        public string City 
+        { 
+            get => _city; 
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("The value is null or empty.");
+                }
+                _city = value;
+            }
+        }
+        protected string _street;
+        public string Street
+        { 
+            get => _street; 
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("The value is null or empty.");
+                }
+                _street = value;
+            }
+        }
+        protected int _houseNumber;
+        public int HouseNumber
+        { 
+            get => _houseNumber;
+            set
+            {
+                if (value == 0)
+                {
+                    throw new ArgumentException("The value is invalid.");
+                }
+                _houseNumber = value;
+            }
+        }
+        protected int _flatNumber;
+        public int FlatNumber
+        { 
+            get => _flatNumber;
+            set
+            {
+                if (value == 0)
+                {
+                    throw new ArgumentException("The value is invalid.");
+                }
+                _flatNumber = value;
+            }
+        }
 
         public Address(string state, string city, string street, int houseNumber, int flatNumber)
         {

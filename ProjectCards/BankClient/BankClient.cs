@@ -4,8 +4,32 @@ using ProjectCards.PaymentMethods.PaymentCards;
 namespace ProjectCards.BankClients;
 internal class BankClient : IComparable<BankClient>
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    protected string _firstName;
+    public string FirstName 
+    {
+        get => _firstName;
+        set
+        {
+            if(string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+            _firstName = value;
+        }
+    }
+    protected string _lastName;
+    public string LastName
+    {
+        get => _lastName;
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            { 
+                throw new ArgumentNullException(nameof(value));
+            }
+            _lastName = value;
+        }
+    }
     public Address Address { get; set; }
     public List<IPayment> PaymentMethods { get; set; }
 

@@ -48,16 +48,16 @@ internal class Program
         var validity3 = new Validity(7, 29);
         var validity4 = new Validity(8, 24);
 
-        var DebetCard1 = new DebetCard("6478 2144 6842 1689", validity1, 374, 47.67f);
-        var DebetCard2 = new DebetCard("5147 3651 2145 9854", validity2, 647, 123.85f);
-        var CashBackCard1 = new CashBackCard("6752 3258 1298 3654", validity3, 657, 5.02f, 0.04f, 30.2f);
-        var CreditCard1 = new CreditCard("3674 2596 3295 1244", validity4, 736, 13.02f, 0.12f, 1245.73f, 2000f);
+        var DebetCard1 = new DebetCard(6478214468421689, validity1, 374, 47.67f);
+        var DebetCard2 = new DebetCard(5147365121459854, validity2, 647, 123.85f);
+        var CashBackCard1 = new CashBackCard(6752325812983654, validity3, 657, 5.02f, 0.04f, 30.2f);
+        var CreditCard1 = new CreditCard(3674259632951244, validity4, 736, 13.02f, 0.12f, 1245.73f, 2000f);
         var Cash1 = new Cash(137.67f);
-        var BitCoin1 = new BitCoin("05SDdfs064asdd4", 0.01f);
+        var BitCoin1 = new BitCoin("98asHTI652ljvf1", 0.01f);
 
         List<IPayment> methodsPerson1 = new List<IPayment>() { DebetCard1, DebetCard2, CashBackCard1, CreditCard1, Cash1, BitCoin1 };
 
-        var address1 = new Address("BY", "Fanipol", "Shulgi", 8, 26);
+        var address1 = new Address("BY", "Fanipol", "Shulgi", 0, 26);
         var Person1 = new BankClient("Eugen", "Gustovskiy", address1, methodsPerson1);
 
 
@@ -65,8 +65,8 @@ internal class Program
         var validity5 = new Validity(1, 28);
         var validity6 = new Validity(10, 24);
 
-        var DebetCard3 = new DebetCard("34751 3695 2145 3265", validity5, 671, 137.66f);
-        var CashBackCard2 = new CashBackCard("6514 2145 3698 7532", validity6, 965, 12.14f, 0.03f, 29.12f);
+        var DebetCard3 = new DebetCard(34751369521453265, validity5, 671, 137.66f);
+        var CashBackCard2 = new CashBackCard(6514214536987532, validity6, 965, 12.14f, 0.03f, 29.12f);
         var Cash2 = new Cash(100.55f);
 
         List<IPayment> methodsPerson2 = new List<IPayment>() { DebetCard3, CashBackCard2, Cash2 };
@@ -79,8 +79,8 @@ internal class Program
         var validity7 = new Validity(8, 25);
         var validity8 = new Validity(4, 27);
 
-        var DebetCard4 = new DebetCard("6741 1123 7422 3654", validity7, 547, 574.01f);
-        var CreditCard3 = new CreditCard("9514 7536 8521 4347", validity8, 347, 24.75f, 0.15f, 851.63f, 1500f);
+        var DebetCard4 = new DebetCard(6741112374223654, validity7, 547, 574.01f);
+        var CreditCard3 = new CreditCard(9514753685214347, validity8, 347, 24.75f, 0.15f, 851.63f, 1500f);
         var Cash3 = new Cash(80.1f);
         var BitCoin3 = new BitCoin("45sdBES674kcpe6", 1f);
 
@@ -123,6 +123,6 @@ internal class Program
 
         //MakePayment(methodsPerson1, 50f);
         //TopUp(methodsPerson2, 100f);
-        GetFullInformation(methodsPerson3);
+        //GetFullInformation(methodsPerson3);
     }
 }
