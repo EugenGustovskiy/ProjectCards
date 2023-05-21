@@ -1,45 +1,55 @@
 ﻿using ProjectCards.Interfaces;
-
 namespace ProjectCards.PaymentMethods;
-internal class Cash : IPayment, IGetFullInformation, IPay
+public class Cash : IPayment, IPay
 {
-    public float AccountAmount { get; set; } 
+    public float _accountAmount;
+
+    public float AccountAmount
+    { 
+        get => _accountAmount; 
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Account amount cannot be negative.");
+            }
+            _accountAmount = value;
+        }
+    } 
 
     public Cash(float accountAmount)
     {
         AccountAmount = accountAmount;
     }
 
-    public bool MakePayment(float sum)
+    public float MakePayment(float sum)
     { 
         if (sum <= 0)
         {
-            return false;
+            return AccountAmount;
         }
         AccountAmount += sum;
-        return true;
+        return AccountAmount;
     }
 
 
-    public bool TopUp(float sum)
+    public float TopUp(float sum)
     {
         if (sum > 0 && sum <= AccountAmount)
         {
             AccountAmount -= sum;
-            return true;
         }
-        return false;
+        return AccountAmount;
     }
 
 
-    public bool PayProduct(float sumProduct)
+    public float PayProduct(float sumProduct)
     {
         if (sumProduct <= AccountAmount)
         {
             AccountAmount -= sumProduct;
-            return true;
         }
-        return false;
+        return AccountAmount;
     }
 
 
@@ -51,8 +61,18 @@ internal class Cash : IPayment, IGetFullInformation, IPay
     }
 
 
-    public string GetFullInformation()
+    public override string ToString()
     {
         return $"All information about: CASH\nCASH: {AccountAmount};";
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if(obj is Cash)
+        {
+            Cash cash = obj as Cash;
+            return cash.AccountAmount == AccountAmount;
+        }
+        return false;
     }
 }

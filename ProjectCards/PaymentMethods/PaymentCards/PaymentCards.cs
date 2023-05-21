@@ -1,8 +1,6 @@
 ﻿using ProjectCards.Interfaces;
-
 namespace ProjectCards.PaymentMethods.PaymentCards;
-
-internal abstract class PaymentCards : IPayment, IGetFullInformation, IPay
+public abstract class PaymentCards : IPayment, IPay
 {
     protected long _cardNumber;
     public long CardNumber
@@ -41,7 +39,19 @@ internal abstract class PaymentCards : IPayment, IGetFullInformation, IPay
             _CVV = value;
         }
     }
-    public float AccountAmount { get; set; }
+    public float _accountAmount;
+    public float AccountAmount 
+    { 
+        get => _accountAmount; 
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Account amount cannot be negative.");
+            }
+            _accountAmount = value;
+        }
+    }
 
     public PaymentCards(long cardNumber, Validity validity, int cvv, float accountAmount)
     {
@@ -51,9 +61,8 @@ internal abstract class PaymentCards : IPayment, IGetFullInformation, IPay
         AccountAmount = accountAmount;
     }
 
-    public abstract bool MakePayment(float sum);
-    public abstract bool TopUp(float sum);
-    public abstract bool PayProduct(float sumProduct);
+    public abstract float MakePayment(float sum);
+    public abstract float TopUp(float sum);
+    public abstract float PayProduct(float sumProduct);
     public abstract float AllMoney();
-    public abstract string GetFullInformation();
 }

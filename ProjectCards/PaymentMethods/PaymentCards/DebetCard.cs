@@ -1,7 +1,6 @@
 ﻿using ProjectCards.Interfaces;
-
 namespace ProjectCards.PaymentMethods.PaymentCards;
-internal class DebetCard : PaymentCards, IGetFullInformation, IPay
+public class DebetCard : PaymentCards, IPay
 {
     public DebetCard(long cardNumber, Validity validity, int cvv, float accountAmount) :
                 base(cardNumber, validity, cvv, accountAmount)
@@ -9,36 +8,35 @@ internal class DebetCard : PaymentCards, IGetFullInformation, IPay
     }
 
 
-    public override bool MakePayment(float sum)
+    public override float MakePayment(float sum)
     {
         if (sum <= AccountAmount)
         {
             AccountAmount -= sum;
-            return true;
+            return AccountAmount;
         }
-        return false;
+        return AccountAmount;
     }
 
 
-    public override bool TopUp(float sum)
+    public override float TopUp(float sum)
     {
         if (sum <= 0)
         {
-            return false;
+            return AccountAmount;
         }
         AccountAmount += sum;
-        return true;
+        return AccountAmount;
     }
 
 
-    public override bool PayProduct(float sumProduct)
+    public override float PayProduct(float sumProduct)
     {
         if (sumProduct <= AccountAmount)
         {
             AccountAmount -= sumProduct;
-            return true;
         }
-        return false;
+        return AccountAmount;
     }
 
 
@@ -50,9 +48,23 @@ internal class DebetCard : PaymentCards, IGetFullInformation, IPay
     }
 
 
-    public override string GetFullInformation()
+    public override string ToString()
     {
-        return $"All information about: DEBET CARD\nCARD NUMBER: {CardNumber};\nVALIDITY: {Validity};\nCCV: {CVV};" +
-                            "\nACCOUNT AMOUNT: {AccountAmount};";
+        return $"All information about: DEBET CARD\nCARD NUMBER: {CardNumber};\nVALIDITY: {Validity};\nCVV: {CVV};" +
+               $"\nACCOUNT AMOUNT: {AccountAmount};";
+    }
+
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is DebetCard)
+        {
+            DebetCard debetCard = obj as DebetCard;
+            return debetCard.CardNumber == CardNumber &&
+                   debetCard.Validity == Validity &&
+                   debetCard.CVV == CVV &&
+                   debetCard.AccountAmount == AccountAmount;
+        }
+        return false;
     }
 }

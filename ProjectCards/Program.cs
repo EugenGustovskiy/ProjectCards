@@ -10,7 +10,7 @@ internal class Program
     {
         foreach (IPayment i in methods)
         {
-            bool message = i.MakePayment(sum);
+            float message = i.MakePayment(sum);
             Console.WriteLine(message);
         }
         return true;
@@ -20,21 +20,8 @@ internal class Program
     {
         foreach (IPayment i in methods)
         {
-            bool message = i.TopUp(sum);
+            float message = i.TopUp(sum);
             Console.WriteLine(message);
-        }
-        return true;
-    }
-
-    static bool GetFullInformation(List<IPayment> methods)
-    {
-        foreach (IPayment i in methods)
-        {
-            if (i is IGetFullInformation fullInfo)
-            {
-                string message = fullInfo.GetFullInformation();
-                Console.WriteLine(message);
-            }
         }
         return true;
     }
@@ -53,11 +40,11 @@ internal class Program
         var CashBackCard1 = new CashBackCard(6752325812983654, validity3, 657, 5.02f, 0.04f, 30.2f);
         var CreditCard1 = new CreditCard(3674259632951244, validity4, 736, 13.02f, 0.12f, 1245.73f, 2000f);
         var Cash1 = new Cash(137.67f);
-        var BitCoin1 = new BitCoin("98asHTI652ljvf1", 0.01f);
+        var BitCoin1 = new BitCoin("98asHTI652ljvf12", 0.01f);
 
         List<IPayment> methodsPerson1 = new List<IPayment>() { DebetCard1, DebetCard2, CashBackCard1, CreditCard1, Cash1, BitCoin1 };
 
-        var address1 = new Address("BY", "Fanipol", "Shulgi", 0, 26);
+        var address1 = new Address("BY", "Fanipol", "Shulgi", 8, 26);
         var Person1 = new BankClient("Eugen", "Gustovskiy", address1, methodsPerson1);
 
 
@@ -82,7 +69,7 @@ internal class Program
         var DebetCard4 = new DebetCard(6741112374223654, validity7, 547, 574.01f);
         var CreditCard3 = new CreditCard(9514753685214347, validity8, 347, 24.75f, 0.15f, 851.63f, 1500f);
         var Cash3 = new Cash(80.1f);
-        var BitCoin3 = new BitCoin("45sdBES674kcpe6", 1f);
+        var BitCoin3 = new BitCoin("45sdBES674kcpe62", 1f);
 
         List<IPayment> methodsPerson3 = new List<IPayment>() { DebetCard4, CreditCard3, Cash3, BitCoin3 };
 

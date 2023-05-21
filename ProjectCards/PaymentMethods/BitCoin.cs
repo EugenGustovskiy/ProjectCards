@@ -1,7 +1,6 @@
 ﻿using ProjectCards.Interfaces;
-
 namespace ProjectCards.PaymentMethods;
-internal class BitCoin : IPayment, IGetFullInformation, IPay
+public class BitCoin : IPayment, IPay
 {
     protected string _walletNumber;
     public string WalletNumber
@@ -13,19 +12,27 @@ internal class BitCoin : IPayment, IGetFullInformation, IPay
             {
                 throw new ArgumentNullException(nameof(value));
             }
-            if (value.Length > 16)
-            {
-                throw new ArgumentException(nameof(value));
-            }
             string walletNumberString = value.ToString().PadLeft(16, '0');
             if (walletNumberString != value.ToString())
             {
                 throw new ArgumentException("Wallet number should be a 16-digit number", nameof(value));
             }
-            _walletNumber = value;
+            _walletNumber = walletNumberString;
         }
     }
-    public float AccountAmount { get; set; }
+    public float _accountAmount;
+    public float AccountAmount
+    { 
+        get => _accountAmount;
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Account amount cannot be negative.");
+            }
+            _accountAmount = value;
+        }
+    }
 
 
     public BitCoin(string walletNumber, float accountAmount)
@@ -50,45 +57,42 @@ internal class BitCoin : IPayment, IGetFullInformation, IPay
     }
 
 
-    public bool MakePayment(float sum)
+    public float MakePayment(float sum)
     {
         ConvertBTCToBYN();
         if (sum <= AccountAmount)
         {
             AccountAmount -= sum;
             ConvertBYNToBTC();
-            return true;
         }
         ConvertBYNToBTC();
-        return false;
+        return AccountAmount;
     }
     
 
-    public bool TopUp(float sum)
+    public float TopUp(float sum)
     {
         ConvertBTCToBYN();
         if (sum <= 0)
         {
             ConvertBYNToBTC();
-            return false;
         }
         AccountAmount += sum;
         ConvertBYNToBTC();
-        return true;
+        return AccountAmount;
     }
 
 
-    public bool PayProduct(float sumProduct)
+    public float PayProduct(float sumProduct)
     {
         ConvertBTCToBYN();
         if (sumProduct <= AccountAmount)
         {
             AccountAmount -= sumProduct;
             ConvertBYNToBTC();
-            return true;
         }
         ConvertBYNToBTC();
-        return false;
+        return AccountAmount;
     }
 
 
@@ -101,8 +105,19 @@ internal class BitCoin : IPayment, IGetFullInformation, IPay
     }
 
 
-    public string GetFullInformation()
+    public override string ToString()
     {
         return $"All information about: BITCOIN\nBITCOIN: {AccountAmount};";
+    }
+
+
+    public override bool Equals(object? obj)
+    {
+        if(obj is BitCoin)
+        {
+            BitCoin bitCoin = obj as BitCoin;
+            return bitCoin.WalletNumber == WalletNumber && bitCoin.AccountAmount == AccountAmount;
+        }
+        return false;
     }
 }

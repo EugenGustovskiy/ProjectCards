@@ -1,11 +1,32 @@
 ﻿using ProjectCards.Interfaces;
-
 namespace ProjectCards.PaymentMethods.PaymentCards;
-
-internal class CashBackCard : PaymentCards, IGetFullInformation, IPay
+public class CashBackCard : PaymentCards, IPay
 {
-    public float ReturnPercentage { get; set; }
-    public float SumCashBack { get; set; }
+    public float _returnPercentage;
+    public float ReturnPercentage 
+    { 
+        get => _returnPercentage; 
+        set
+        {
+            if (value < 0 || value > 100)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 100 (inclusive).");
+            }
+        }
+    }
+    public float _sumCashBack;
+    public float SumCashBack
+    { 
+        get => _sumCashBack; 
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Account amount cannot be negative.");
+            }
+            _sumCashBack = value;
+        }
+    }
 
     public CashBackCard(long cardNumber, Validity validity, int ccv, float accountAmount, float returnPercentage,
                         float sumCashBack) : base(cardNumber, validity, ccv, accountAmount)
@@ -15,61 +36,54 @@ internal class CashBackCard : PaymentCards, IGetFullInformation, IPay
     }
 
 
-    public override bool MakePayment(float sum)
+    public override float MakePayment(float sum)
     {
         if (sum <= SumCashBack)
         {
             SumCashBack -= sum;
-            return true;
         }
         else if (sum <= AccountAmount)
         {
             AccountAmount -= sum;
-            return true;
         }
         else if (sum <= AccountAmount + SumCashBack)
         {
             AccountAmount += SumCashBack;
             SumCashBack = 0;
             AccountAmount -= sum;
-            return true;
         }
-        else { return false; }
+        return AccountAmount;
     }
 
     
-    public override bool TopUp(float sum)
+    public override float TopUp(float sum)
     {
         if (sum < 0)
         {
-            return false;
+            return AccountAmount;
         }
         AccountAmount += sum;
-        return true;  
+        return AccountAmount;  
     }
 
 
-    public override bool PayProduct(float sumProduct)
+    public override float PayProduct(float sumProduct)
     {
         if (sumProduct <= SumCashBack)
         {
             SumCashBack -= sumProduct;
-            return true;
         }
         else if (sumProduct <= AccountAmount)
         {
             AccountAmount -= sumProduct;
-            return true;
         }
         else if (sumProduct <= AccountAmount + SumCashBack)
         {
             AccountAmount += SumCashBack;
             SumCashBack = 0;
             AccountAmount -= sumProduct;
-            return true;
         }
-        else
-        { return false; }
+        return AccountAmount;
     }
 
 
@@ -81,9 +95,25 @@ internal class CashBackCard : PaymentCards, IGetFullInformation, IPay
     }
 
 
-    public override string GetFullInformation()
+    public override string ToString()
     {
         return $"All information about: CASHBACK CARD\nCARD NUMBER: {CardNumber};\nVALIDITY: {Validity};\nCVV: {CVV};" +
                $"\nACCOUNT AMOUNT: {AccountAmount};\nRETURN  PERCENTAGE: {ReturnPercentage};\nSUM CASNBACK: {SumCashBack};";
+    }
+
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is CashBackCard)
+        {
+            CashBackCard cashBackCard = obj as CashBackCard;
+            return cashBackCard.CardNumber == CardNumber &&
+                   cashBackCard.Validity == Validity &&
+                   cashBackCard.CVV == CVV &&
+                   cashBackCard.AccountAmount == AccountAmount &&
+                   cashBackCard.ReturnPercentage == ReturnPercentage &&
+                   cashBackCard.SumCashBack == SumCashBack;
+        }
+        return false;
     }
 }

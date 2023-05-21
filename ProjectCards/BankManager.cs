@@ -1,7 +1,6 @@
 ﻿using ProjectCards.BankClients;
 using ProjectCards.PaymentMethods;
 using ProjectCards.PaymentMethods.PaymentCards;
-
 namespace ProjectCards;
 internal class BankManager
 {
@@ -27,7 +26,7 @@ internal class BankManager
 
         foreach (BankClient i in sortedClients)
         {
-            string infoClients = i.AllInformation();
+            string infoClients = i.ToString();
             Console.WriteLine(infoClients);
         }
     }
@@ -51,7 +50,7 @@ internal class BankManager
     //Two methods to list all debit cards for a BankClient
     public void AllDebetCard()
     {
-        var allDebetCard = BankClients.SelectMany(x => x.PaymentMethods.OfType<DebetCard>()).Select(x => x.GetFullInformation());
+        var allDebetCard = BankClients.SelectMany(x => x.PaymentMethods.OfType<DebetCard>()).Select(x => x.ToString());
         foreach (var i in allDebetCard)
         {
             Console.WriteLine(i);
@@ -65,7 +64,7 @@ internal class BankManager
         {
             foreach (var card in i.PaymentMethods.OfType<DebetCard>())
             {
-                Console.WriteLine($"Client: {i.LastName}\n{card.GetFullInformation()}\n");
+                Console.WriteLine($"Client: {i.LastName}\n{card.ToString()}\n");
             }
         }
     }

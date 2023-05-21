@@ -1,6 +1,5 @@
 ﻿namespace ProjectCards.Interfaces;
-
-internal interface IPay
+public interface IPay
 {
-    bool PayProduct(float sumProduct);
+    float PayProduct(float sumProduct);
 }

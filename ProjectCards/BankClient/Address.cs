@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectCards.BankClients
+﻿namespace ProjectCards.BankClients
 {
-    internal class Address : IComparable<Address>
+    public class Address : IComparable<Address>
     {
         protected string _state;
         public string State
@@ -53,7 +47,7 @@ namespace ProjectCards.BankClients
             get => _houseNumber;
             set
             {
-                if (value == 0)
+                if (value == 0 || value < 0)
                 {
                     throw new ArgumentException("The value is invalid.");
                 }
@@ -66,7 +60,7 @@ namespace ProjectCards.BankClients
             get => _flatNumber;
             set
             {
-                if (value == 0)
+                if (value == 0 || value < 0)
                 {
                     throw new ArgumentException("The value is invalid.");
                 }
@@ -92,7 +86,21 @@ namespace ProjectCards.BankClients
 
         public override string ToString()
         {
-            return "State: " + State + ", " + "City: " + City + ", " + "Street: " + Street + ", " + "HouseNumber: " + HouseNumber + ", " + "FlatNumber: " + FlatNumber;
+            return $"State: {State}, City: {City}, Street: {Street}, HouseNumber: {HouseNumber}, FlatNumber: {FlatNumber}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj is Address)
+            {
+                Address address = obj as Address;
+                return address.State == State &&
+                       address.City == City &&
+                       address.Street == Street &&
+                       address.HouseNumber == HouseNumber &&
+                       address.FlatNumber == FlatNumber;
+            }
+            return false;
         }
     }
 }
