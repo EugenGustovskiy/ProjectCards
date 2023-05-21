@@ -63,7 +63,6 @@ public class BitCoin : IPayment, IPay
         if (sum <= AccountAmount)
         {
             AccountAmount -= sum;
-            ConvertBYNToBTC();
         }
         ConvertBYNToBTC();
         return AccountAmount;

@@ -12,6 +12,7 @@ public class CreditCard : PaymentCards, IPay
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 100 (inclusive).");
             }
+            _creditPercentage = value;
         }
     }
     public float _creditMoney;

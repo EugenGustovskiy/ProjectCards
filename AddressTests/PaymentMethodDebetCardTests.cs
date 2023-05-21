@@ -19,7 +19,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardEqualsTestPositive()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var debetCard2 = new DebetCard(6478214468421689, validity, 374, 47.67f);
 
@@ -31,7 +31,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardEqualsTestCardNumberNegative()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var debetCard2 = new DebetCard(6478214468421681, validity, 374, 47.67f);
 
@@ -41,8 +41,8 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardEqualsTestValidityNegative()
         {
-            var validity = new Validity(1, 1);
-            var validity1 = new Validity(2, 1);
+            var validity = new Validity(1, 23);
+            var validity1 = new Validity(2, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var debetCard2 = new DebetCard(6478214468421681, validity1, 374, 47.67f);
 
@@ -52,7 +52,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardEqualsTestCVVNegative()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var debetCard2 = new DebetCard(6478214468421681, validity, 375, 47.67f);
 
@@ -62,7 +62,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardEqualsTestAccountAmountNegative()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var debetCard2 = new DebetCard(6478214468421681, validity, 375, 47.68f);
 
@@ -72,7 +72,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardMakePaymentTest()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var expectedResult = 37.67f;
             var actualResult = debetCard.MakePayment(10f);
@@ -83,7 +83,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void DebetCardTopUpTest()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
             var debetCard1 = new DebetCard(6478214468421689, validity, 374, 47.67f);
             var expectedResult = 57.67f;
             var actualResult = debetCard1.TopUp(10f);

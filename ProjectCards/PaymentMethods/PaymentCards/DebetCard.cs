@@ -13,7 +13,6 @@ public class DebetCard : PaymentCards, IPay
         if (sum <= AccountAmount)
         {
             AccountAmount -= sum;
-            return AccountAmount;
         }
         return AccountAmount;
     }

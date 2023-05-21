@@ -11,6 +11,7 @@ public class Validity
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 12 (inclusive).");
             }
+            _month = value;
         }
     }
     public byte _year;
@@ -23,6 +24,7 @@ public class Validity
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 22 and 99 (inclusive).");
             }
+            _year = value;
         }
     }
 

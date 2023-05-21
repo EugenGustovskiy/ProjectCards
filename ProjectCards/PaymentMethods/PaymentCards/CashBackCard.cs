@@ -12,6 +12,7 @@ public class CashBackCard : PaymentCards, IPay
             {
                 throw new ArgumentOutOfRangeException(nameof(value), "Value must be between 0 and 100 (inclusive).");
             }
+            _returnPercentage = value;
         }
     }
     public float _sumCashBack;
@@ -99,6 +100,8 @@ public class CashBackCard : PaymentCards, IPay
     {
         return $"All information about: CASHBACK CARD\nCARD NUMBER: {CardNumber};\nVALIDITY: {Validity};\nCVV: {CVV};" +
                $"\nACCOUNT AMOUNT: {AccountAmount};\nRETURN  PERCENTAGE: {ReturnPercentage};\nSUM CASNBACK: {SumCashBack};";
+
+        return $"All information about: CASHBACK CARD\nCARD NUMBER: {CardNumber};\nVALIDITY: {Validity};\nCVV: {CVV};\nACCOUNT AMOUNT: {AccountAmount};\nRETURN  PERCENTAGE: {ReturnPercentage};\nSUM CASNBACK: {SumCashBack};";
     }
 
 

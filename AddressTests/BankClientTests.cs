@@ -10,7 +10,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void BanlClientToStringFormatMethodTest()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
 
             var DebetCard = new DebetCard(1111111111111111, validity, 111, 10f);
             var CashBackCard = new CashBackCard(2222222222222222, validity, 222, 2f, 0.2f, 20f);
@@ -24,9 +24,9 @@ namespace ProjectCardsTests
 
 
             var expectedResult = "Last Name: Gustovskiy;\nAddress: State: BY, City: Minsk, Street: Nezavisimosti, HouseNumber: 1, FlatNumber: 1;\n" +
-                                 "All information about: DEBET CARD\nCARD NUMBER: 1111111111111111;\nVALIDITY: 1/1;\nCVV: 111;\nACCOUNT AMOUNT: 10;\n" +
-                                 "All information about: CASHBACK CARD\nCARD NUMBER: 2222222222222222;\nVALIDITY: 1/1;\nCVV: 222;\nACCOUNT AMOUNT: 2;\nRETURN  PERCENTAGE: 0,2;\nSUM CASNBACK: 20;\n" +
-                                 "All information about: CREDIT CARD\nCARD NUMBER: 3333333333333333;\nVALIDITY: 1/1;\nCVV: 333;\nACCOUNT AMOUNT: 3;\nCREDIT PERCENTAGE: 0,3;\nCREDIT MONEY: 2000;\nCREDIT LIMIT: 3000;\n" +
+                                 "All information about: DEBET CARD\nCARD NUMBER: 1111111111111111;\nVALIDITY: 1/23;\nCVV: 111;\nACCOUNT AMOUNT: 10;\n" +
+                                 "All information about: CASHBACK CARD\nCARD NUMBER: 2222222222222222;\nVALIDITY: 1/23;\nCVV: 222;\nACCOUNT AMOUNT: 2;\nRETURN  PERCENTAGE: 0,2;\nSUM CASNBACK: 20;\n" +
+                                 "All information about: CREDIT CARD\nCARD NUMBER: 3333333333333333;\nVALIDITY: 1/23;\nCVV: 333;\nACCOUNT AMOUNT: 3;\nCREDIT PERCENTAGE: 0,3;\nCREDIT MONEY: 2000;\nCREDIT LIMIT: 3000;\n" +
                                  "All information about: CASH\nCASH: 444;\n" +
                                  "All information about: BITCOIN\nBITCOIN: 1;\n";
             var actualResult = person.ToString();
@@ -36,7 +36,7 @@ namespace ProjectCardsTests
         [TestMethod]
         public void BankClientPay()
         {
-            var validity = new Validity(1, 1);
+            var validity = new Validity(1, 23);
 
             var DebetCard = new DebetCard(1111111111111111, validity, 111, 10f);
             var CashBackCard = new CashBackCard(2222222222222222, validity, 222, 2f, 0.2f, 20f);
